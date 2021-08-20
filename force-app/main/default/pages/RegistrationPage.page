@@ -1,0 +1,50 @@
+<apex:page standardController="Contact" extensions="RegistrationController" applyHtmlTag="false" applyBodyTag="false" sidebar="false" showHeader="false" standardStyleSheets="false">
+    <body>
+        <div class="slds">
+            <apex:outputPanel rendered="{!error}">
+                <div class="slds-notify_container">
+                    <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture" role="alert">
+                        <span class="slds-assistive-text">Error</span>
+                        <h2>{!errorMessage}</h2>
+                    </div>
+                </div>
+            </apex:outputPanel>
+            
+            <h3 class="slds-text-heading--small slds-truncate">Tell about yourself</h3>
+            <apex:form >
+                <apex:pageBlock >
+                    <apex:pageBlockSection >
+                        <apex:inputField value="{!Contact.FirstName}" />
+                        <apex:inputField value="{!Contact.LastName}" />
+                        <apex:inputField value="{!Contact.Email}" />
+                        <apex:inputField value="{!Contact.Password__c}" />
+                    </apex:pageBlockSection>
+                    <apex:pageBlockButtons location="bottom">
+                        <apex:commandButton value="Submit" action="{!save}" styleclass="slds-button slds-button--brand" />
+                        <input class="slds-button" type="reset" value="Reset" />
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+            </apex:form>
+        </div>
+    </body>
+</apex:page>
+
+
+<!--
+<apex:page controller="RegistrationController" sidebar="false" showHeader="false">
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection columns="1">
+<apex:inputText label="First Name" value="{!firstName}"/>
+<apex:inputText label="Last Name" value="{!lastName}"/>
+<apex:inputText label="Email" value="{!email}"/>
+<apex:inputText label="Password" value="{!password}" />
+</apex:pageBlockSection>
+<apex:pageBlockButtons >
+<apex:commandButton value="Save" action="{!registerUser}"/>
+<apex:commandButton value="Cancel" action="{!cancelRegistration}"/>
+</apex:pageBlockButtons>
+</apex:pageBlock>
+</apex:form>
+</apex:page>
+-->

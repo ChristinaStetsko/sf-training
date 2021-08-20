@@ -1,0 +1,14 @@
+<apex:page controller="HomePageController" sidebar="false" showHeader="false" >
+    <h5>
+        IT'S OUR HOME PAGE!
+    </h5>
+    
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!cars}" var="cr">
+            <apex:column value="{!cr.Id}"/>
+            <apex:column value="{!cr.Model__c}"/>
+            <apex:column value="{!cr.Showroom__c}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    
+</apex:page>
