@@ -1,14 +1,54 @@
-<apex:page controller="HomePageController" sidebar="false" showHeader="false" >
+<apex:page controller="HomePageController" id="thePage" sidebar="false" showHeader="false" standardStyleSheets="false">
+    <apex:pageBlock title="cars">
+    <apex:dataTable value="{!cars}" var="car" cellPadding="4" border="1">
+        <!-- <apex:facet name="caption">table caption</apex:facet> -->
+        <apex:facet name="header">List of cars</apex:facet>
+        <!-- <apex:facet name="footer">table footer</apex:facet> -->
+
+        <apex:column >
+                <apex:facet name="header">Name</apex:facet>
+                        {!car.Name}
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Model</apex:facet>
+                        {!car.Model__c}
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Color</apex:facet>
+                        {!car.Color__c}
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Price, $</apex:facet>
+                        {!car.Price__c}
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Showroom</apex:facet>
+                        {!car.Showroom__r.Name}
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Owner</apex:facet>
+                        {!car.Car_Owner__r.Name}
+            </apex:column>
+
+    </apex:dataTable>
+
+</apex:pageBlock>
+</apex:page>
+
+
+
+
+<!-- <apex:page controller="HomePageController" sidebar="false" showHeader="false" >
     <h5>
         IT'S OUR HOME PAGE!
     </h5>
     
     <apex:pageBlock >
-        <apex:pageBlockTable value="{!cars}" var="cr">
+        <apex:dataTable value="{!cars}" var="cr">
             <apex:column value="{!cr.Id}"/>
             <apex:column value="{!cr.Model__c}"/>
             <apex:column value="{!cr.Showroom__c}"/>
-        </apex:pageBlockTable>
+        </apex:dataTable>
     </apex:pageBlock>
     
-</apex:page>
+</apex:page> -->
