@@ -1,14 +1,25 @@
 <apex:page applyBodyTag="false" controller="LoginController" sidebar="false" showHeader="false" standardStyleSheets="false">
+
     <body>
         <div class="slds">
             <div class="slds-m-around--medium">
                 <div class="slds-card">
+                    
+                    <apex:outputPanel rendered="{!error}">
+                        <div class="slds-notify_container">
+                            <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture" role="alert">
+                                <span class="slds-assistive-text">Error</span>
+                                <h2>{!errorMessage}</h2>
+                            </div>
+                        </div>
+                    </apex:outputPanel>
+                    
                     <div class="slds-card__header slds-grid grid--flex-spread">
                         <h2 class="slds-text-heading--small slds-truncate">Please login</h2>
                     </div>
                     <div class="slds-card__body slds-p-horizontal--small">
                         <div class="slds-text-body--regular slds-p-top--large slds-p-bottom--large">
-                            <apex:form >
+                            <apex:form>
                                 <div class="slds-form--horizontal">
                                     <div class="slds-form-element">
                                         <label class="slds-form-element__label">Email</label>
@@ -24,14 +35,18 @@
                                     </div>
                                 </div>
                                 <div class="input-group">
-                                    <apex:outputLabel value="Are you admin?" for="MyCheckbox"/>
-                                    <apex:inputCheckbox value="{!isAdmin}" id="MyCheckbox"/>
+                                    <apex:outputLabel value="Are you admin?" for="MyCheckbox" />
+                                    <apex:inputCheckbox value="{!isAdmin}" id="MyCheckbox" />
                                 </div>
-                                <apex:commandButton value="Login" action="{!forwardToHome}" styleclass="slds-button slds-button--brand" reRender="results"/>
-                                <apex:commandButton value="Registration" action="{!forwardToRegisterPage}" styleclass="slds-button slds-button--brand" reRender="results"/>
+                                <apex:commandButton value="Login" action="{!forwardToHome}" styleclass="slds-button slds-button--brand" reRender="results"
+                                />
+                                <apex:commandButton value="Registration" action="{!forwardToRegisterPage}" styleclass="slds-button slds-button--brand" reRender="results"
+                                />
                                 <div class="form-group">
                                     <div style="padding: 5px;"></div>
-                                    <small class="pull-right"><apex:commandLink action="{!forwardToResetPassword}">Forgot password?</apex:commandLink></small>
+                                    <small class="pull-right">
+                                        <apex:commandLink action="{!forwardToResetPassword}">Forgot password?</apex:commandLink>
+                                    </small>
                                 </div>
                             </apex:form>
                         </div>
