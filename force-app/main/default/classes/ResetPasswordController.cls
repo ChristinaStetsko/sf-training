@@ -12,9 +12,9 @@ public without sharing class ResetPasswordController {
 	}
 
 	public PageReference sendPassword() {
-		System.debug('>>>>>>>>>>>>>>> Get email from form: ' + email);
-
+		
 		cont = [SELECT FirstName, LastName, Email, Password__c FROM Contact WHERE Email = :email LIMIT 1];
+		System.debug('>>>>>>>>>>>>>>> ' + cont);
 
 		String password = (String) cont.get('Password__c');
 		String[] replyTo = new List<String>{ email };
@@ -30,9 +30,6 @@ public without sharing class ResetPasswordController {
 
 			//mail.setSubject(subject);
 			message.setPlainTextBody(emailBody);
-			// message.setToAddresses(hardcodeEmail);
-			// System.debug('>>>>>>>>>>>>>>>>>>>>>>>>> hardcode Email: ' + hardcodeEmail);
-			
 			message.setToAddresses(replyTo);
 			System.debug('>>>>>>>>>>>>>>>>>>>>>>>>>  Reply To: ' + replyTo);
 
