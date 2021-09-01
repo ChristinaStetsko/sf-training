@@ -43,7 +43,11 @@
                 </apex:column>
                 <apex:column>
                     <apex:facet name="header">Details</apex:facet>
-                    {!car.Car_Owner__r.Name}
+                    <apex:commandButton value="Details"/>
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Details</apex:facet>
+                    <apex:commandButton value="Service"/>
                 </apex:column>
             </apex:pageBlockTable>
 
