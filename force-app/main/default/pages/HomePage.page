@@ -1,23 +1,22 @@
 <apex:page controller="HomePageController" id="thePage" sidebar="false" showHeader="false" standardStyleSheets="false">
     <apex:form>
-        <apex:pageBlock title="Cars">
+        <apex:pageBlock title="cars">
+            <!-- <apex:dataTable value="{!cars}" var="car" cellPadding="4" border="1"> -->
 
             <apex:pageBlockSection columns="2" /> Select color:
-            <apex:selectList size="1" value="{!colorPickvalue}">
+            <apex:selectList size="1" value="{!colorPickValue}">
                 <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
                 <apex:selectOption itemLabel="Black" itemValue="Black"></apex:selectOption>
                 <apex:selectOption itemLabel="White" itemValue="White"></apex:selectOption>
-                <apex:selectOption itemLabel="Yellow" itemValue="Yellow"></apex:selectOption>
+                <apex:selectOption itemLabel="Silver" itemValue="Silver"></apex:selectOption>
             </apex:selectList>
-            <apex:pageBlockSection columns="2" /> Select price:
-            <apex:selectList size="1" value="{!colorPickvalue}">
+            <apex:selectList size="1" value="{!showroomPickValue}">
                 <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
-                <apex:selectOption itemLabel="< 10'000$" itemValue="Black"></apex:selectOption>
-                <apex:selectOption itemLabel="10'000$-20'000$" itemValue="White"></apex:selectOption>
-                <apex:selectOption itemLabel=">20'000$" itemValue="White"></apex:selectOption>
+                <apex:selectOption itemLabel="Borowaya" itemValue="Borowaya"></apex:selectOption>
+                <apex:selectOption itemLabel="Dzerzhinskogo" itemValue="Dzerzhinskogo"></apex:selectOption>
             </apex:selectList>
 
-            <apex:pageBlockTable id="table1" value="{!carList}" var="car" cellPadding="4" border="1">
+            <apex:pageBlockTable id="table1" value="{!carsList}" var="car" cellPadding="4" border="1">
                 <apex:column>
                     <apex:facet name="header">Name</apex:facet>
                     {!car.Name}
@@ -42,6 +41,10 @@
                     <apex:facet name="header">Owner</apex:facet>
                     {!car.Car_Owner__r.Name}
                 </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Details</apex:facet>
+                    {!car.Car_Owner__r.Name}
+                </apex:column>
             </apex:pageBlockTable>
 
         </apex:pageBlock>
@@ -50,96 +53,74 @@
 
 
 
-<!-- <apex:pageBlockTable id="table1" value="{!carList}" var="car" columnsWidth="65px, 80px, 70px, 70px, 70px, 70px">
-                <apex:column>
-                    <apex:facet name="header">Name</apex:facet>
-                    <apex:outputLink value="/{!car.Name}">
-                    </apex:outputLink>
-                </apex:column>
-                <apex:column value="{!car.Model__c}" />
-                <apex:column value="{!car.Color__c}" />
-                <apex:column value="{!car.Price__c}" />
-                <apex:column value="{!car.Showroom__r.Name}" />
-                <apex:column value="{!car.Car_Owner__r.Name}" />
-            </apex:pageBlockTable> -->
-
-
-
 <!-- <apex:page controller="HomePageController" id="thePage" sidebar="false" showHeader="false" standardStyleSheets="false">
+<apex:form>
     <apex:pageBlock title="Cars">
-        <apex:dataTable value="{!cars}" var="car" cellPadding="4" border="1">
-        <apex:facet name="header">List of cars</apex:facet>
-        <apex:column >
+
+        <apex:pageBlockSection columns="2" /> Select color:
+        <apex:selectList size="1" value="{!colorPickvalue}">
+            <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
+            <apex:selectOption itemLabel="Black" itemValue="Black"></apex:selectOption>
+            <apex:selectOption itemLabel="White" itemValue="White"></apex:selectOption>
+            <apex:selectOption itemLabel="Yellow" itemValue="Yellow"></apex:selectOption>
+        </apex:selectList>
+        <apex:pageBlockSection columns="2" /> Select price:
+        <apex:selectList size="1" value="{!colorPickvalue}">
+            <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
+            <apex:selectOption itemLabel="<10'000$" itemValue="Black"></apex:selectOption>
+            <apex:selectOption itemLabel="10'000$-20'000$" itemValue="White"></apex:selectOption>
+            <apex:selectOption itemLabel=">20'000$" itemValue="White"></apex:selectOption>
+        </apex:selectList>
+
+        <apex:pageBlockTable id="table1" value="{!carList}" var="car" cellPadding="4" border="1">
+            <apex:column>
                 <apex:facet name="header">Name</apex:facet>
-                        {!car.Name}
+                {!car.Name}
             </apex:column>
-            <apex:column >
+            <apex:column>
                 <apex:facet name="header">Model</apex:facet>
-                        {!car.Model__c}
+                {!car.Model__c}
             </apex:column>
-            <apex:column >
+            <apex:column>
                 <apex:facet name="header">Color</apex:facet>
-                        {!car.Color__c}
+                {!car.Color__c}
             </apex:column>
-            <apex:column >
+            <apex:column>
                 <apex:facet name="header">Price, $</apex:facet>
-                        {!car.Price__c}
+                {!car.Price__c}
             </apex:column>
-            <apex:column >
+            <apex:column>
                 <apex:facet name="header">Showroom</apex:facet>
-                        {!car.Showroom__r.Name}
+                {!car.Showroom__r.Name}
             </apex:column>
-            <apex:column >
+            <apex:column>
                 <apex:facet name="header">Owner</apex:facet>
-                        {!car.Car_Owner__r.Name}
+                {!car.Car_Owner__r.Name}
             </apex:column>
+        </apex:pageBlockTable>
 
-    </apex:dataTable>
     </apex:pageBlock>
+</apex:form>
 </apex:page> -->
-
-
-
 
 
 <!-- <apex:form>
-            <apex:panelGrid columns="2">
-                <apex:outputLabel value="Color" />
-                <apex:inputField value="{!cars.Color__c}" />
-                <apex:outputLabel value="Price" />
-                <apex:inputField value="{!cars.Price__c}" />
-            </apex:panelGrid>
-        </apex:form>
-    </apex:pageBlock>
-
-    <apex:pageBlock>
-        <apex:pageBlockTable value="{!getCars}" var="carrs">
-            <apex:column value="{!carrs.Name}" />
-            <apex:column value="{!carrs.Model__c}" />
-            <apex:column value="{!carrs.Color__c}" />
-            <apex:column value="{!carrs.Price__c}" />
-            <apex:column value="{!carrs.Showroom__r.Name}" />
-            <apex:column value="{!carrs.Car_Owner__r.Name}" />
-        </apex:pageBlockTable> -->
+        <apex:panelGrid columns="2">
+            <apex:outputLabel value="Color" />
+            <apex:inputField value="{!cars.Color__c}" />
+            <apex:outputLabel value="Price" />
+            <apex:inputField value="{!cars.Price__c}" />
+        </apex:panelGrid>
+    </apex:form>
+</apex:pageBlock> -->
 
 
 
-
-
-
-
-
-<!-- <apex:page controller="HomePageController" sidebar="false" showHeader="false" >
-    <h5>
-        IT'S OUR HOME PAGE!
-    </h5>
-    
-    <apex:pageBlock >
-        <apex:dataTable value="{!cars}" var="cr">
-            <apex:column value="{!cr.Id}"/>
-            <apex:column value="{!cr.Model__c}"/>
-            <apex:column value="{!cr.Showroom__c}"/>
-        </apex:dataTable>
-    </apex:pageBlock>
-    
-</apex:page> -->
+<!-- <apex:pageBlockTable value="{!carList}" var="carrs">
+    <apex:column value="{!carrs.Name}" />
+    <apex:column value="{!carrs.Model__c}" />
+    <apex:column value="{!carrs.Color__c}" />
+    <apex:column value="{!carrs.Price__c}" />
+    <apex:column value="{!carrs.Showroom__r.Name}" />
+    <apex:column value="{!carrs.Car_Owner__r.Name}" />
+</apex:pageBlockTable>  -->
