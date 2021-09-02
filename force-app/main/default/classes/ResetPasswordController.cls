@@ -1,10 +1,9 @@
-public without sharing class ResetPasswordController {
+public class ResetPasswordController {
 	private ApexPages.StandardController stdCtrl { get; set; }
 	public String email { get; set; }
 	public Boolean contactFound { get; set; }
-	public Contact cont { get; set; }
+	public Contact cont = new Contact();
 	//public String subject { get;set; }
-	//public List<String> hardcodeEmail = new List<String>{ 'stetsko.christina@gmail.com' };
 
 	public ResetPasswordController(ApexPages.StandardController std) {
 		stdCtrl = std;
@@ -12,9 +11,12 @@ public without sharing class ResetPasswordController {
 	}
 
 	public PageReference sendPassword() {
-		
-		cont = [SELECT FirstName, LastName, Email, Password__c FROM Contact WHERE Email = :email LIMIT 1];
-		System.debug('>>>>>>>>>>>>>>> ' + cont);
+		try {
+			cont = [SELECT  Email, Password__c FROM Contact WHERE Email = :email LIMIT 1];
+		} catch (Exception e) {
+			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL, 'Сheck your email'));
+			return null;
+		}
 
 		String password = (String) cont.get('Password__c');
 		String[] replyTo = new List<String>{ email };
@@ -39,7 +41,8 @@ public without sharing class ResetPasswordController {
 
 			return new PageReference('/LoginPage');
 		} else {
-			contactFound = false; //add error message
+			contactFound = false;
+			ApexPages.addMessage(new ApexPages.message(ApexPages.Severity.FATAL, 'Please check Email & Password'));
 		}
 		return null;
 	}

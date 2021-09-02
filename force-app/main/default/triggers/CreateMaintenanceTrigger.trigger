@@ -1,7 +1,18 @@
 trigger CreateMaintenanceTrigger on Maintenance__c(before insert) {
-    Maintenance__c maint = new Maintenance__c();
-    maint.Car__c = Trigger.new[0].Car__c;
-    maint.Showroom__c = Trigger.new[0].Showroom__c;
-    maint.Scheduled_date__c = Trigger.new[0].Scheduled_date__c;
-    insert maint;
+    Set <Date> maintSet = new Set <Date>();
+    Set <Date> existingMaint = new Set <Date>();
+
+    for (Maintenance__c maintenance : Trigger.new) {
+        maintSet.add(maintenance.Scheduled_date__c);
+    }
+
+    for (Maintenance__c maintenance : [SELECT Scheduled_date__c FROM Maintenance__c WHERE Scheduled_date__c in : maintSet]) {
+        existingMaint.add(maintenance.Scheduled_date__c);
+    }
+
+    for (Maintenance__c maint : trigger.new) {
+        if (existingMaint.contains(maint.Scheduled_date__c)) {
+            maint.Scheduled_date__c.addError('This date is already scheduled. Choose another date.');
+        }
+    }
 }

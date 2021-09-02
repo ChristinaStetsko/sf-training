@@ -6,8 +6,8 @@ public with sharing class RegistrationController{
     
     // contstructor
     public RegistrationController(ApexPages.StandardController std){
-        stdCtrl=std;
-        error=false;
+        stdCtrl = std;
+        error = false;
     }
     
     // action method to validate the input and save the Contact
