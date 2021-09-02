@@ -5,8 +5,8 @@ public without sharing class LoginController {
 	public Boolean contactFound { get; set; }
 	public Contact cont { get; set; }
 
-	// Constructor
 	public LoginController() {
+		contactFound = false;
 	}
 
 	public PageReference forwardToHome() {
@@ -14,16 +14,14 @@ public without sharing class LoginController {
 			SELECT FirstName, LastName, Email, Password__c
 			FROM Contact
 			WHERE Email = :email AND Password__c = :password
-			LIMIT 1
 		];
-
-		System.debug('>>>>>>>>>>>>>>> ' + cont);
-		if (cont != null) {
-				contactFound = true;
-				return new PageReference('/HomePage');
+		if (conts.size() > 0) {
+			cont = conts[0];
+			contactFound = true;
+			return new PageReference('/HomePage');
 		} else {
 			contactFound = false;
-			ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'Please check Email & Password'));
+			ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL, 'Please check Email & Password'));
 		}
 		return null;
 	}
