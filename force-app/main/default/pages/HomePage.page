@@ -1,9 +1,9 @@
 <apex:page controller="HomePageController" id="thePage" sidebar="false" showHeader="false" standardStyleSheets="false">
-    <apex:form>
-        <apex:pageBlock title="cars">
-            <!-- <apex:dataTable value="{!cars}" var="car" cellPadding="4" border="1"> -->
 
-            <apex:pageBlockSection columns="2" /> Select color:
+<apex:form>
+        <apex:pageBlock title="cars">
+
+            <apex:pageBlockSection columns="2" /> Select color and showroom :
             <apex:selectList size="1" value="{!colorPickValue}">
                 <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
                 <apex:selectOption itemLabel="Black" itemValue="Black"></apex:selectOption>
@@ -16,6 +16,7 @@
                 <apex:selectOption itemLabel="Dzerzhinskogo" itemValue="Dzerzhinskogo"></apex:selectOption>
             </apex:selectList>
 
+            
             <apex:pageBlockTable id="table1" value="{!carsList}" var="car" cellPadding="4" border="1">
                 <apex:column>
                     <apex:facet name="header">Name</apex:facet>
@@ -43,10 +44,10 @@
                 </apex:column>
                 <apex:column>
                     <apex:facet name="header">Details</apex:facet>
-                    <apex:commandButton value="Details"/>
+                    <apex:commandButton value="Details" action="{!URLFOR($Action.Car__c.CarDetailPage)}"/>
                 </apex:column>
                 <apex:column>
-                    <apex:facet name="header">Details</apex:facet>
+                    <apex:facet name="header">Schedule a service</apex:facet>
                     <apex:commandButton value="Service"/>
                 </apex:column>
             </apex:pageBlockTable>
@@ -54,3 +55,6 @@
         </apex:pageBlock>
     </apex:form>
 </apex:page>
+
+<!-- <apex:commandButton value="Details" action="{!URLFOR($Action.Car__c.view,car.id)}"/>
+ -->

@@ -2,7 +2,7 @@ public class ResetPasswordController {
 	private ApexPages.StandardController stdCtrl { get; set; }
 	public String email { get; set; }
 	public Boolean contactFound { get; set; }
-	public Contact cont = new Contact();
+	public Contact cont = new Contact(); //Email = TestEmail
 	//public String subject { get;set; }
 
 	public ResetPasswordController(ApexPages.StandardController std) {
@@ -42,7 +42,7 @@ public class ResetPasswordController {
 			return new PageReference('/LoginPage');
 		} else {
 			contactFound = false;
-			ApexPages.addMessage(new ApexPages.message(ApexPages.Severity.FATAL, 'Please check Email & Password'));
+			ApexPages.addMessage(new ApexPages.message(ApexPages.Severity.FATAL, 'Please check Email'));
 		}
 		return null;
 	}

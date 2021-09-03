@@ -10,6 +10,8 @@ public without sharing class LoginController {
 	}
 
 	public PageReference forwardToHome() {
+//Contact contact = new Contact(); LIMIT 1
+
 		List<Contact> conts = [
 			SELECT FirstName, LastName, Email, Password__c
 			FROM Contact

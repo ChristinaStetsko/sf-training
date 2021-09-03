@@ -8,6 +8,8 @@ trigger RegistratioTrigger on Contact (before insert) {
 
     for (Contact cont : [SELECT Email FROM Contact WHERE email in : emailSet]) {
         existingEmail.add(cont.Email);
+        //if select.size > 0 >>>>>>> error
+        //TriggerHelper
     }
 
     for (Contact con : trigger.new) {
