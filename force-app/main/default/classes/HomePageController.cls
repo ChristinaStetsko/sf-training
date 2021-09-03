@@ -17,4 +17,6 @@ public class HomePageController {
 	}
 
 }
-//убрать hardcode
+/* убрать hardcode from Color__c
+перенаправление на URL CarDetailPage/id - car.id
+*/

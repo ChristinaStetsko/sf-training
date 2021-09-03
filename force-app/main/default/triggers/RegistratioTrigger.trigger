@@ -18,3 +18,10 @@ trigger RegistratioTrigger on Contact (before insert) {
         }
     }
 }
+
+
+/*
+Trigger isAfter triggerisInsert
+добавить trigger isBefore и trigger isAfter insert + TriggerHelper (TriggerHandler).
+Call helper
+*/
