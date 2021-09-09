@@ -12,11 +12,9 @@
 
 
             <apex:selectList size="1" value="{!showroomPickValue}">
+                <apex:selectOptions value="{!selectShowroom}" />
                 <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
-                <apex:selectOption itemLabel="Borowaya" itemValue="Borowaya"></apex:selectOption>
-                <apex:selectOption itemLabel="Dzerzhinskogo" itemValue="Dzerzhinskogo"></apex:selectOption>
             </apex:selectList>
-
 
 
             <apex:pageBlockTable id="table1" value="{!carsList}" var="car" cellPadding="4" border="1">
@@ -46,10 +44,8 @@
                 </apex:column>
                 <apex:column>
                     <apex:facet name="header">Details</apex:facet>
-                    <apex:commandButton value="Details" action="{!getCarDetail}" />
-                    <apex:param assignTo="{!recordId}" name="Id" value="" />
-                    <!-- <apex:commandButton value="Details" action="{!getCarDetail}"/> -->
-                    <!-- <apex:commandButton value="Details" action="{$Page.CarDetailPage/car.id}"/> -->
+                    <apex:outputLink value="https://energy-connect-4809-dev-ed.lightning.force.com/lightning/r/Car__c/{!car.id}/view">Details</apex:outputLink>
+                    <!-- <apex:commandButton value="Details" action="{!$CurrentPage.parameters.id} " /> -->
                 </apex:column>
                 <apex:column>
                     <apex:facet name="header">Schedule a service</apex:facet>
