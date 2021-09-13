@@ -1,0 +1,29 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Car__c",
+                "referenceId": "Car__cRef1"
+            },
+            "IsDeleted": false,
+            "Name": "KIA",
+            "Model": "Magentis M5",
+            "Color": "White",
+            "Price": "20,000.00",
+            "Showroom": "Borowaya"
+        },
+        {
+            "attributes": {
+                "type": "Car__c",
+                "referenceId": "Car__cRef2"
+            },
+            "IsDeleted": false,
+            "Name": "Ford",
+            "Model": "Fusion",
+            "Color": "Black",
+            "Price": "15,000.00",
+            "Showroom": "Dzerzhinskogo",
+            "Car_Owner": "Andy Young"
+        }
+    ]
+}

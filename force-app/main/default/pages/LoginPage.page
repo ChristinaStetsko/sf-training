@@ -4,16 +4,9 @@
         <div class="slds">
             <div class="slds-m-around--medium">
                 <div class="slds-card">
-                    
-                    <apex:outputPanel rendered="{!error}">
-                        <div class="slds-notify_container">
-                            <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture" role="alert">
-                                <span class="slds-assistive-text">Error</span>
-                                <h2>{!errorMessage}</h2>
-                            </div>
-                        </div>
-                    </apex:outputPanel>
-                    
+
+                    <apex:pageMessages id="errorMess"></apex:pageMessages>
+
                     <div class="slds-card__header slds-grid grid--flex-spread">
                         <h2 class="slds-text-heading--small slds-truncate">Please login</h2>
                     </div>
@@ -38,7 +31,7 @@
                                     <apex:outputLabel value="Are you admin?" for="MyCheckbox" />
                                     <apex:inputCheckbox value="{!isAdmin}" id="MyCheckbox" />
                                 </div>
-                                <apex:commandButton value="Login" action="{!forwardToHome}" styleclass="slds-button slds-button--brand" reRender="results"
+                                <apex:commandButton value="Login" action="{!forwardToHome}" styleclass="slds-button slds-button--brand" reRender="errorMess"
                                 />
                                 <apex:commandButton value="Registration" action="{!forwardToRegisterPage}" styleclass="slds-button slds-button--brand" reRender="results"
                                 />

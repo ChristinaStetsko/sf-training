@@ -1,54 +1,63 @@
 <apex:page controller="HomePageController" id="thePage" sidebar="false" showHeader="false" standardStyleSheets="false">
-    <apex:pageBlock title="cars">
-    <apex:dataTable value="{!cars}" var="car" cellPadding="4" border="1">
-        <!-- <apex:facet name="caption">table caption</apex:facet> -->
-        <apex:facet name="header">List of cars</apex:facet>
-        <!-- <apex:facet name="footer">table footer</apex:facet> -->
+    <apex:form id="form">
+        <apex:pageBlock title="Cars">
+            <apex:pageMessages></apex:pageMessages>
 
-        <apex:column >
-                <apex:facet name="header">Name</apex:facet>
-                        {!car.Name}
-            </apex:column>
-            <apex:column >
-                <apex:facet name="header">Model</apex:facet>
-                        {!car.Model__c}
-            </apex:column>
-            <apex:column >
-                <apex:facet name="header">Color</apex:facet>
-                        {!car.Color__c}
-            </apex:column>
-            <apex:column >
-                <apex:facet name="header">Price, $</apex:facet>
-                        {!car.Price__c}
-            </apex:column>
-            <apex:column >
-                <apex:facet name="header">Showroom</apex:facet>
-                        {!car.Showroom__r.Name}
-            </apex:column>
-            <apex:column >
-                <apex:facet name="header">Owner</apex:facet>
-                        {!car.Car_Owner__r.Name}
-            </apex:column>
 
-    </apex:dataTable>
 
-</apex:pageBlock>
+            <apex:pageBlockSection columns="2" /> Select color and showroom :
+
+            <apex:selectList size="1" value="{!colorPickValue}">
+                <apex:selectOptions value="{!selectColor}" />
+                <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
+            </apex:selectList>
+
+            <apex:selectList size="1" value="{!showroomPickValue}">
+                <apex:selectOptions value="{!selectShowroom}" />
+                <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
+            </apex:selectList>
+
+            <apex:pageBlockTable id="table1" value="{!getAllCars}" var="car" cellPadding="4" border="1">
+                <apex:column>
+                    <apex:facet name="header">Brand</apex:facet>
+                    {!car.Name}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Model</apex:facet>
+                    {!car.Model__c}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Color</apex:facet>
+                    {!car.Color__c}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Price, $</apex:facet>
+                    {!car.Price__c}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Showroom</apex:facet>
+                    {!car.Showroom__r.Name}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Owner</apex:facet>
+                    {!car.Car_Owner__r.Name}
+                </apex:column>
+
+                <apex:column>
+                    <apex:facet name="header">Details</apex:facet>
+                    <apex:outputLink title="" value="/{!car.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold"></apex:outputLink>
+                    <apex:commandLink action="{!getInfo}" reRender="form" value="Details">
+                        <apex:param name="carid" value="{!car.Id}" assignTo="{!recId}" />
+                    </apex:commandLink>
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Schedule service</apex:facet>
+                    <apex:outputLink title="" value="/{!car.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold"></apex:outputLink>
+                    <apex:commandLink action="{!scheduleService}" reRender="form" value="Schedule Service">
+                        <apex:param name="carid" value="{!car.Id}" assignTo="{!recId}" />
+                    </apex:commandLink>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
 </apex:page>
-
-
-
-
-<!-- <apex:page controller="HomePageController" sidebar="false" showHeader="false" >
-    <h5>
-        IT'S OUR HOME PAGE!
-    </h5>
-    
-    <apex:pageBlock >
-        <apex:dataTable value="{!cars}" var="cr">
-            <apex:column value="{!cr.Id}"/>
-            <apex:column value="{!cr.Model__c}"/>
-            <apex:column value="{!cr.Showroom__c}"/>
-        </apex:dataTable>
-    </apex:pageBlock>
-    
-</apex:page> -->

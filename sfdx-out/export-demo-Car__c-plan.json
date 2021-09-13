@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "Car__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-demo-Car__cs.json"
+        ]
+    }
+]

@@ -1,0 +1,33 @@
+<apex:page controller="HomePageController" id="thePage" sidebar="false" showHeader="false" standardStyleSheets="false">
+    <apex:form>
+        <apex:pageBlock title="cars">
+            <apex:pageBlockTable id="table1" value="{!carsList}" var="car" cellPadding="4" border="1">
+                <apex:column>
+                    <apex:facet name="header">Name</apex:facet>
+                    {!car.Name}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Model</apex:facet>
+                    {!car.Model__c}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Color</apex:facet>
+                    {!car.Color__c}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Price, $</apex:facet>
+                    {!car.Price__c}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Showroom</apex:facet>
+                    {!car.Showroom__r.Name}
+                </apex:column>
+                <apex:column>
+                    <apex:facet name="header">Owner</apex:facet>
+                    {!car.Car_Owner__r.Name}
+                </apex:column>
+            </apex:pageBlockTable>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
