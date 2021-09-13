@@ -1,21 +1,66 @@
 public class HomePageController {
+	public String MAIN_URL = 'https://issoft48-dev-ed.lightning.force.com/lightning/r/Car__c/';
+	// public String MAIN_URL = 'https://energy-connect-4809-dev-ed.lightning.force.com/lightning/r/Car__c/';
 	public String colorPickValue { get; set; }
 	public String showroomPickValue { get; set; }
-	public Car__c currentRecord { get; set; }
-	public String recordId { get; set; }
-	public List<Car__c> carsList { get; set; }
+	public String recId { get; set; }
+	public List<Car__c> getAllCars { get; set; }
+	public List<Showroom__c> getAllShowrooms { get; set; }
+
+	public HomePageController() {
+		loadData();
+	}
+
+	private void loadData() {
+		getAllCars = [
+			SELECT Id, Name, Model__c, Color__c, Price__c, Showroom__r.Name, Car_Owner__r.Name
+			FROM Car__c
+			LIMIT 50
+		];
+	}
+
+	public Pagereference getInfo() {
+		PageReference pageReference = null;
+		Car__c getCarInfo = null;
+		for (Car__c c : getAllCars)
+			if (c.Id == recId) {
+				getCarInfo = c;
+				ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL, 'No such car found'));
+				break;
+			}
+		if (getCarInfo != null) {
+			System.debug('>>>>>>>>>>>>>>>> Success:' + getCarInfo);
+			return new PageReference(MAIN_URL + recId + '/view');
+		}
+		return null;
+	}
+
+	public Pagereference scheduleService() {
+		Car__c sceduleCarService = null;
+		for (Car__c c : getAllCars)
+			if (c.Id == recId) {
+				sceduleCarService = c;
+				ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL, 'No such car found'));
+				break;
+			}
+		if (sceduleCarService != null) {
+			System.debug('>>>>>>>>>>>>>>>> Success:' + sceduleCarService);
+			return new PageReference('/HomePage');
+		}
+		return null;
+	}
 
 	public void getCars() {
-		carsList = new List<Car__c>(
+		getAllCars = new List<Car__c>(
 			[
 				SELECT Id, Name, Model__c, Color__c, Price__c, Showroom__r.Name, Car_Owner__r.Name
 				FROM Car__c
-				WHERE Color__c = :colorPickvalue
-				AND Showroom__r.Name = :showroomPickValue
+				WHERE Color__c = :colorPickvalue AND Showroom__r.Name = :showroomPickValue
+				// WHERE Showroom__r.Name = :showroomPickValue
 				LIMIT 50
 			]
 		);
-		System.debug('1>>>>>>>>>>>>>>>>>>>>>>>>>>>' + carsList);
+		System.debug('1>>>>>>>>>>>>>>>>>>>>>>>>>>>' + getAllCars);
 	}
 
 	public List<SelectOption> getSelectColor() {
@@ -32,37 +77,13 @@ public class HomePageController {
 
 	public List<SelectOption> getSelectShowroom() {
 		List<SelectOption> optionsShowroom = new List<SelectOption>();
-		List<Car__c> cList = new List<Car__c>();
-		cList = [SELECT Id, Showroom__r.Name FROM Car__c];
-		System.debug('55555>>>>>>>>>>>>>>>>>>>>>>>>>>>' + cList);
+		List<Showroom__c> shList = new List<Showroom__c>();
+		shList = [SELECT Id, Name FROM Showroom__c];
 		optionsShowroom.add(new SelectOption('--Select showroom--', '--Select showroom--'));
-		for (Car__c showroom : cList) {
-				optionsShowroom.add(new SelectOption(showroom.Id, showroom.Showroom__r.Name));
+		for (Showroom__c showroom : shList) {
+			optionsShowroom.add(new SelectOption(showroom.Name, showroom.Name));
 		}
 		System.debug('66666>>>>>>>>>>>>>>>>>>>>>>>>>>>' + optionsShowroom);
 		return optionsShowroom;
 	}
-
-	public PageReference getId() {
-		PageReference ref = new PageReference('HomePage');
-		ref.getParameters().put('id', recordId);
-		System.debug('66666>>>>>>>>>>>>>>>>>>>>>>>>>>>' + recordId);
-		ref.setRedirect(true);
-		return ref;
-	}
-
-	// public PageReference getRec() {
-	// 	currentRecord = [SELECT Id, Name FROM Car__c WHERE Id = :ApexPages.currentPage().getParameters().get('id')];
-	// 	System.debug('9999999>>>>>>>>>>>>>>>>>>>>>>>>>>>' + currentRecord);
-	// 	return null;
-	// }
-
-	//public PageReference getCarDetail() {
-	//String myID = apexpages.currentPage().getParameters().get('id');
-	// PageReference reference = new PageReference('/CarDetailPage');
-	// reference.getParameters().put('id',recordId);
-	// System.debug('66666>>>>>>>>>>>>>>>>>>>>>>>>>>>' + reference);
-	// reference.setRedirect(true);
-	// return reference;
-	//}
 }
