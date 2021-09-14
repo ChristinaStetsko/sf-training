@@ -3,15 +3,12 @@
         <apex:pageBlock title="Cars">
             <apex:pageMessages></apex:pageMessages>
 
-
-
             <apex:pageBlockSection columns="2" /> Select color and showroom :
 
             <apex:selectList size="1" value="{!colorPickValue}">
                 <apex:selectOptions value="{!selectColor}" />
                 <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
             </apex:selectList>
-
             <apex:selectList size="1" value="{!showroomPickValue}">
                 <apex:selectOptions value="{!selectShowroom}" />
                 <apex:actionSupport event="onchange" action="{!getCars}" reRender="table1" />
@@ -42,13 +39,13 @@
                     <apex:facet name="header">Owner</apex:facet>
                     {!car.Car_Owner__r.Name}
                 </apex:column>
-
                 <apex:column>
                     <apex:facet name="header">Details</apex:facet>
-                    <apex:outputLink title="" value="/{!car.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold"></apex:outputLink>
+                    <apex:outputLink value="/apex/CarDetailPage?id={!car.id}">Details</apex:outputLink>
+                    <!-- <apex:outputLink title="" value="/{!car.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold"></apex:outputLink>
                     <apex:commandLink action="{!getInfo}" reRender="form" value="Details">
                         <apex:param name="carid" value="{!car.Id}" assignTo="{!recId}" />
-                    </apex:commandLink>
+                    </apex:commandLink> -->
                 </apex:column>
                 <apex:column>
                     <apex:facet name="header">Schedule service</apex:facet>
