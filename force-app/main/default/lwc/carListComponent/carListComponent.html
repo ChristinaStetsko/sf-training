@@ -1,0 +1,44 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div class="slds-grid slds-gutters">
+        <!-- comboboxes start here: -->
+        <div class="slds-m-around_small">
+            <span>
+                <lightning-combobox name="color" label="Color" value={color}
+                placeholder="Search Color" options={colorPickListValues} onchange={handleChange}>
+            </lightning-combobox>
+            </span>
+        </div>
+
+        <div class="slds-m-around_small">
+            <span>
+                <lightning-combobox name="showroom" label="Showroom" value={showroom} placeholder="Select Showroom"
+                    options={showroomPickListValues} onchange={handleShowroom}></lightning-combobox>
+            </span>
+        </div>
+        <!-- comboboxes end here -->
+    </div>
+
+    <lightning-card title="Car List">
+        <lightning-datatable key-field="Id" data={carWrapperList} columns={columns} hide-checkbox-column="true">
+        </lightning-datatable>
+    </lightning-card>
+</template>
+
+
+<!-- <template>
+    <lightning-card title="Wraaper Class in Lwc" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <template if:true={carWrapperList.data}>
+                <template for:each={carWrapperList.data} for:item="wrapper">
+                    <p key={wrapper.carId}>{wrapper.carName}</p>
+                    <p key={wrapper.carId}>{wrapper.carModel}</p>
+                    <p key={wrapper.carId}>{wrapper.carColor}</p>
+                    <p key={wrapper.carId}>{wrapper.carPrice}</p>
+                    <p key={wrapper.carId}>{wrapper.showroomName}</p>
+                    <p key={wrapper.carId}>{wrapper.carOwnerName}</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template> -->

@@ -1,0 +1,32 @@
+<template>
+    <lightning-card title="REGISTRATION FORM">
+        <lightning-input label="First Name" name="FirstName" type="text" placeholder="First Name"
+            onchange={handleChange}></lightning-input>
+        <lightning-input label="Last Name" name="LastName" type="text" placeholder="Last Name" onchange={handleChange}>
+        </lightning-input>
+        <lightning-input label="Email Adress" name="Email" type="email" placeholder="Email" required
+            onchange={handleChange}></lightning-input>
+        <lightning-input label="Password" name="Password" placeholder="Password" required onchange={handleChange}
+            minlength="1" maxlength="15" type="Password"></lightning-input>
+        <div class="slds-var-p-around_small slds-var-p-top_large">
+            <lightning-input type="checkbox" label="Are You Admin?"></lightning-input>
+            </br>
+        </div>
+
+
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+                <span>
+                    <lightning-button variant="brand-outline" label="Register me!" onclick={createContact}
+                    class="slds-var-m-left_x-small"></lightning-button>
+                </span>
+            </div>
+            <div class="slds-col">
+                <span>
+                    <lightning-button variant="brand-outline" label="Log in" onclick={handleLoginClick}
+                        class="slds-var-m-left_x-small"></lightning-button>
+                </span>
+            </div>
+        </div>
+    </lightning-card>
+</template>

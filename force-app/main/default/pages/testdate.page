@@ -1,0 +1,27 @@
+<apex:page sidebar="true" showChat="true">
+
+    <head>
+        <apex:stylesheet value="{!URLFOR($Resource.JQueryTest,'/css/jquery-ui.css')}" />
+        <apex:includeScript value="   {!URLFOR($Resource.JQueryTest,'/js/jquery-1.10.2.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.JQueryTest,'/js/jquery-ui.js')}" />
+
+    </head>
+    <script>
+        $(function () {
+            $("#datepicker-13").datepicker();
+            $("#datepicker-13").datepicker("show");
+        });
+    </script>
+    <apex:form id="theForm">
+
+        <body>
+            <div class="demo">
+                <p>Enter Date:
+                    <input type="text" id="datepicker-13" />
+                </p>
+            </div>
+        </body>
+
+
+    </apex:form>
+</apex:page>

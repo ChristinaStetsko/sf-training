@@ -1,0 +1,24 @@
+<template>
+    <lightning-card title="Please Login" icon-name="custom:custom63">
+        <div class="slds-var-m-around_medium">
+            <lightning-layout vertical-align="end" class="slds-var-m-bottom_small">
+                <lightning-layout-item flexibility="grow">
+                    <lightning-input type="email" onchange={handleEmailChange} label="Email" value={searchEmail}>
+                    </lightning-input>
+                    <lightning-input type="text" onchange={handlePasswordChange} label="Password" value={searchPassword}>
+                    </lightning-input>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-var-p-left_xx-small">
+                    <lightning-button label="Search" onclick={handleSearch}></lightning-button>
+                </lightning-layout-item>
+            </lightning-layout>
+            <template if:true={contacts}>
+                <template for:each={contacts} for:item="contact">
+                    <p key={contact.Id}>{contact.Name}</p>
+                    <p key={contact.Id}>{contact.Email}</p>
+                    <p key={contact.Id}>{contact.Password__c}</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>
