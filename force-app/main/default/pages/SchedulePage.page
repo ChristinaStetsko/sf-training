@@ -1,4 +1,4 @@
-<apex:page controller="CarDetailController" id="detailPage" sidebar="false" showHeader="false">
+<apex:page controller="ScheduleController" sidebar="false" showHeader="false">
     <apex:form>
         <apex:pageBlock>
             <apex:pageBlockSection collapsible="false" columns="2">
@@ -8,7 +8,7 @@
                 <apex:outputField label="Color" value="{!singleCar.Color__c}" />
                 <apex:outputField label="Price" value="{!singleCar.Price__c}" />
                 <apex:outputField label="Owner" value="{!singleCar.Car_Owner__r.Name}" />
-                <apex:outputField label="Showroom" value="{!singleCar.Showroom__r.Name}" />
+                <apex:outputField label="Showroom" value="{!singleCar.Showroom__c}" />
                 <!-- <apex:outputField label="Maintenance Date" value="{!singlecar.Maintenances__r[0].Scheduled_date__r}" /> -->
             </apex:pageBlockSection>
             <apex:pageBlockButtons location="bottom">
@@ -17,4 +17,13 @@
             </apex:pageBlockButtons>
         </apex:pageBlock>
     </apex:form>
+    <!-- <apex:form>
+        Date:
+        <apex:inputText value="{!dateVal}" size="10" id="demo" onfocus="DatePicker.pickDate(false, this , false);" />
+    </apex:form> -->
 </apex:page>
+
+<!-- Неправильно отрабатывает, если не было ни одного TO. 
+    Попробуй вывести страницу с данными по Car__c.Id + поле Maintenance с календариком 
+    Ошибка в SOQL из-за поля maintId - если его нет, то и отбирать нечего, от того и Unauthorized
+-->

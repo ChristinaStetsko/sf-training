@@ -1,0 +1,39 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-card variant="Narrow">
+        <lightning-layout multiple-rows>
+            <lightning-layout-item size="12" padding="around-small">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <td scope="col" style="width: 20px">
+                                <lightning-button-icon variant="base" size="small" icon-name="utility:clear"
+                                    alternative-text="Clear Search" onclick={clearSearch}></lightning-button-icon>
+                            </td>
+                            <td scope="col">
+                                <lightning-combobox name="color" label="Color" value={color}
+                                    placeholder="Search Color" options={colorPickListValues} onchange={handleChange}>
+                                </lightning-combobox>
+                            </td>
+                        </tr>
+                        <tr class="slds-line-height_reset">
+                            <th scope="col">Index</th>
+                            <th scope="col">Case Number</th>
+                            <th scope="col">Account Name</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Subject</th>
+                            <th scope="col">Color</th>
+                            <th scope="col">Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent" for:each={searchable} for:item="item" key={item.Id}>
+                            <td scope="col">{item.index}</td>
+                            <th scope="row">{item.caseData.Color__c}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+</template>

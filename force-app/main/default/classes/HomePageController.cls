@@ -1,6 +1,4 @@
 public class HomePageController {
-	//public String MAIN_URL = 'https://issoft48-dev-ed.lightning.force.com/lightning/r/Car__c/';
-	public String MAIN_URL = 'https://energy-connect-4809-dev-ed.lightning.force.com/lightning/r/Car__c/';
 	public String colorPickValue { get; set; }
 	public String showroomPickValue { get; set; }
 	public String recId { get; set; }
@@ -19,37 +17,6 @@ public class HomePageController {
 		];
 	}
 
-	public Pagereference getInfo() {
-		PageReference pageReference = null;
-		Car__c getCarInfo = null;
-		for (Car__c c : getAllCars) 
-			if (c.Id == recId) {
-				getCarInfo = c;
-				ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL, 'No such car found'));
-				break;
-			}
-		if (getCarInfo != null) {
-			System.debug('>>>>>>>>>>>>>>>> Success:' + getCarInfo);
-			return new PageReference('/CarDetailPage'); //custom page
-		}
-		return null;
-	}
-
-	public Pagereference scheduleService() {
-		Car__c sceduleCarService = null;
-		for (Car__c c : getAllCars)
-			if (c.Id == recId) {
-				sceduleCarService = c;
-				ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL, 'No such car found'));
-				break;
-			}
-		if (sceduleCarService != null) {
-			System.debug('>>>>>>>>>>>>>>>> Success:' + sceduleCarService);
-			return new PageReference('/HomePage');
-		}
-		return null;
-	}
-
 	public void getCars() {
 		getAllCars = new List<Car__c>(
 			[
@@ -61,7 +28,6 @@ public class HomePageController {
 		);
 		System.debug('1>>>>>>>>>>>>>>>>>>>>>>>>>>>' + getAllCars);
 	}
-
 
 	//Filteres goes here:
 	public List<SelectOption> getSelectColor() {
@@ -88,23 +54,8 @@ public class HomePageController {
 		return optionsShowroom;
 	}
 
-
-
+	
+	public PageReference forwardToSchedule() {
+		return new PageReference('/SchedulePage');
+	}
 }
-
-// // find the account record within the collection
-// Account tobeDeleted = null;
-// for(Account a : accs)
-//  if (a.Id == SelectedAccountId) {
-// 	tobeDeleted = a;
-// 	break;
-//  }
-
-// //if account record found delete it
-// if (tobeDeleted != null) {
-//  Delete tobeDeleted;
-// }
-
-// //refresh the data
-// LoadData();
-// }    

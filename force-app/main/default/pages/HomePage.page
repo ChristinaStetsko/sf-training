@@ -49,10 +49,13 @@
                 </apex:column>
                 <apex:column>
                     <apex:facet name="header">Schedule service</apex:facet>
-                    <apex:outputLink title="" value="/{!car.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold"></apex:outputLink>
+                    <apex:outputLink value="/apex/SchedulePage?id={!car.id}">Details</apex:outputLink>
+                    <!-- <apex:commandLink action="{!forwardToSchedule}">Schedule service</apex:commandLink> -->
+                    <!-- <apex:outputLink value="/apex/SchedulePage?id={!car.id}">Schedule service</apex:outputLink> -->
+                    <!-- <apex:outputLink title="" value="/{!car.id}/e?retURL=/apex/{!$CurrentPage.Name}" style="font-weight:bold"></apex:outputLink>
                     <apex:commandLink action="{!scheduleService}" reRender="form" value="Schedule Service">
                         <apex:param name="carid" value="{!car.Id}" assignTo="{!recId}" />
-                    </apex:commandLink>
+                    </apex:commandLink> -->
                 </apex:column>
             </apex:pageBlockTable>
         </apex:pageBlock>
