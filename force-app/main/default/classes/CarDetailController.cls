@@ -23,4 +23,5 @@ public class CarDetailController {
 	public PageReference forwardToHomePage() {
 		return new PageReference('/HomePage');
 	}
+	
 }
