@@ -1,45 +1,46 @@
 import { LightningElement, wire, api, track } from "lwc";
-import getCases from "@salesforce/apex/FilteredTableController.getCases";
-import { NavigationMixin } from "lightning/navigation";
+import getCars from "@salesforce/apex/FilteredTableController.getCars";
 import { refreshApex } from "@salesforce/apex";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import { getPicklistValues } from "lightning/uiObjectInfoApi";
 import COLOR_FIELD from "@salesforce/schema/Car__c.Color__c";
 
-export default class FilteredTable extends NavigationMixin(LightningElement) {
+export default class FilteredTable extends LightningElement {
 	@track data;
 	searchable = [];
-	wiredCaseCount;
-	wiredCases;
+	wiredCarCount;
+	wiredCars;
 
 	doneTypingInterval = 0;
 	colorPickListValues;
-	priorityPickListValues;
+	showroomPickListValues; //<<<<<<<<<------------------------
 
 	searchAllValue;
 
-	caseNumber = "";
-	accountName = "";
-	contactName = "";
-	subject = "";
+	carNumber = "";
+	carName = "";
+	model = "";
 	color = null;
-	priority = null;
+	price = "";
+	showroom = null;
+	ownerName = "";
 
-	@wire(getCases, {
-		caseNumber: "$caseNumber",
-		accountName: "$accountName",
-		contactName: "$contactName",
-		subject: "$subject",
+	@wire(getCars, {
+		carNumber: "$carNumber",
+		carName: "$carName",
+		model: "$model",
 		color: "$color",
-		priority: "$priority"
+		price: "$price",
+		showroom: "$showroom",
+		ownerName: "$ownerName"
 	})
 	wiredSObjects(result) {
 		console.log("wire getting called");
-		this.wiredCases = result;
+		this.wiredCars = result;
 		if (result.data) {
-			this.searchable = this.data = result.data.map((caseObj, index) => ({
-				caseData: { ...caseObj },
+			this.searchable = this.data = result.data.map((carObj, index) => ({
+				carData: { ...carObj },
 				index: index + 1,
 				rowIndex: index
 			}));
@@ -90,27 +91,13 @@ export default class FilteredTable extends NavigationMixin(LightningElement) {
 		const regex = new RegExp("(^" + searchStr + ")|(." + searchStr + ")|(" + searchStr + "$)");
 		if (searchStr.length > 2) {
 			this.searchable = this.data.filter((item) => {
-				if (
-					regex.test(item.caseData.Color__c?.toLowerCase() + " " + item.caseData.Color__c?.toLowerCase()
-					)
-				) {
+				if (regex.test(item.carData.Color__c?.toLowerCase() + " " + item.carData.Color__c?.toLowerCase())) {
 					return item;
 				}
 			});
-		} else if (this.caseNumber.length <= 2) {
+		} else if (this.carNumber.length <= 2) {
 			this.searchable = this.data;
 		}
 		console.log(this.searchable);
-	}
-
-	handleNavigate(event) {
-		event.preventDefault();
-		this[NavigationMixin.Navigate]({
-			type: "standard__recordPage",
-			attributes: {
-				actionName: "view",
-				recordId: event.target.dataset.id
-			}
-		});
 	}
 }

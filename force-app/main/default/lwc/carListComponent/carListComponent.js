@@ -24,7 +24,7 @@ export default class CarListComponent extends LightningElement {
 	columns = COLUMNS;
 	@wire(getAllCars)
 	carsHandler({ data, error }) {
-		if (data) { 
+		if (data) {
 			console.log(data);
 			this.carWrapperList = data;
 		}
@@ -67,15 +67,4 @@ export default class CarListComponent extends LightningElement {
 		this.showroom = event.target.value;
 	}
 	//comboboxes end here
-
-	handleSearchOptionChange(event) {
-        this.color = event.target.value;
-        //console.log('Selected Boat Type - ', this.color);
-        // Create the const searchEvent
-        // searchEvent must be the new custom event search
-        const searchEvent = new CustomEvent('search', {
-            detail: {carColor: this.color}
-        });
-        this.dispatchEvent(searchEvent);
-    }
 }

@@ -30,22 +30,6 @@ public with sharing class CarsLWCController {
 		return showroom;
 	}
 
-	@AuraEnabled(Cacheable=true)
-	public static List<Car__c> getBoats(String carColor, String ShowroomId) {
-		// Without an explicit carColor, the full list is desired
-		String query =
-			'SELECT ' +
-			'Id, Name, Model__c, Color__c, Price__c, Showroom__r.Name, Car_Owner__r.Name' +
-			'FROM Car__c';
-		if (String.isNotBlank(carColor)) {
-			query += ' WHERE Color__c = :carColor';
-		} if (String.isNotBlank(carColor)) {
-			query += ' AND Showroom__r.Name = :ShowroomId';
-		}
-		query += ' WITH SECURITY_ENFORCED ';
-		return Database.query(query);
-	}
-
 	public class CarWrapper {
 		@AuraEnabled
 		public String carId;

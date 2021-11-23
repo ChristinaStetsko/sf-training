@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>52.0</apiVersion>
+    <masterLabel>Car List Datatable</masterLabel>
+    <description>Component to display all cars with filtration</description>
     <isExposed>true</isExposed>
     <targets>
         <target>lightning__AppPage</target>
